@@ -2,8 +2,10 @@
     {% set package_database, package_schema = dbt_audit.get_package_database_and_schema('dbt_audit') %}
     {% set relation = adapter.get_relation(package_database, package_schema, 'dbt_run') %}
 
-    {% set unquoted_types = ['Float32', 'Float64', 'Int32', 'Int64', 'UInt32', 'UInt64'] %}
-    {% set unquoted_types = unquoted_types + ['Nullable(' ~ data_type ~ ')' for data_type in unquoted_types] %}
+    {% set unquoted_types = [] %}
+    {% for data_type in ['Float32', 'Float64', 'Int32', 'Int64', 'UInt32', 'UInt64'] %}
+        {% do unquoted_types.extend([data_type, 'Nullable(' ~ data_type ~ ')']) %}
+    {% endfor %}
 
     {% if execute and relation %}
         {% set columns = adapter.get_columns_in_relation(relation) %}
