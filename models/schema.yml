@@ -21,8 +21,8 @@ models:
     data_type: String
   - name: materialization
     data_type: String
-  - name: run_type
-    data_type: String
+  - name: is_full_refresh
+    data_type: Bool
   - name: run_start_time
     data_type: DateTime64(6)
   - name: compile_start_time

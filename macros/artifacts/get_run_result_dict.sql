@@ -3,7 +3,6 @@
     {% if is_full_refresh is none %}
         {% set is_full_refresh = flags.FULL_REFRESH %}
     {% endif %}
-    {% set run_type = 'full' if is_full_refresh else 'incremental' %}
 
     {% set compile_timing = none %}
     {% set execute_timing = none %}
@@ -27,7 +26,7 @@
         'name': run_result.node.name,
         'alias': run_result.node.alias,
         'materialization': run_result.node.config.materialized,
-        'run_type': run_type,
+        'is_full_refresh': is_full_refresh,
         'run_start_time': run_started_at.replace(tzinfo=None),
         'compile_start_time': compile_timing_dict['start_time'],
         'compile_end_time': compile_timing_dict['end_time'],

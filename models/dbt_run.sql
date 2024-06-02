@@ -21,7 +21,7 @@ select
     '' as name,
     '' as alias,
     '' as materialization,
-    '' as run_type,
+    false as is_full_refresh,
     cast(now(), 'DateTime64(6)') as run_start_time,
     cast(null, 'Nullable(DateTime64(6))') as compile_start_time,
     cast(null, 'Nullable(UInt64)') as compile_duration,

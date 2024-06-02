@@ -32,9 +32,9 @@
                                         cityHash64('{{ invocation_id }}', '{{ node_id }}')
                                     {%- elif value is none -%}
                                         null
-                                    {%- elif 'Float32' in data_type or 'Float64' in data_type -%}
-                                        {{ value }}
-                                    {%- elif 'Int32' in data_type or 'Int64' in data_type -%}
+                                    {%- elif data_type == 'Bool' -%}
+                                        {{ 'true' if value else 'false' }}
+                                    {%- elif data_type in ['Float32', 'Float64', 'Int32', 'Int64'] -%}
                                         {{ value }}
                                     {%- elif 'DateTime64' in data_type -%}
                                         toDateTime64('{{ value.isoformat() }}', 6)
