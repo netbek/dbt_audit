@@ -1,5 +1,6 @@
 {% macro upload_run_results() -%}
-    {% set relation = dbt_audit.get_relation('dbt_run') %}
+    {% set package_database, package_schema = dbt_audit.get_package_database_and_schema('dbt_audit') %}
+    {% set relation = adapter.get_relation(package_database, package_schema, 'dbt_run') %}
 
     {% if execute and relation %}
         {% set columns = adapter.get_columns_in_relation(relation) %}
