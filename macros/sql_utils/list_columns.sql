@@ -1,5 +1,5 @@
 {% macro list_columns(relation_alias=none) -%}
-    {% for column_name in var('dbt_audit_column_names') -%}
-        {% if relation_alias %}{{ relation_alias }}.{% endif %}{{ adapter.quote(column_name) }} as {{ column_name }}{% if not loop.last %},{% endif %}
+    {% for column in var('dbt_audit_columns') -%}
+        {% if relation_alias %}{{ relation_alias }}.{% endif %}{{ adapter.quote(column) }} as {{ column }}{% if not loop.last %},{% endif %}
     {% endfor %}
 {%- endmacro %}

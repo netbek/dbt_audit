@@ -20,7 +20,7 @@ Based on [dbt_artifacts](https://github.com/brooklyn-data/dbt_artifacts/tree/2.6
         +schema: dbt_audit
 
     vars:
-      dbt_audit_column_names: [dbt_run_id]
+      dbt_audit_columns: [dbt_run_id]
     ```
 
 3. Run `dbt deps` to install the package.
