@@ -1,20 +1,20 @@
 {% macro get_timing_dict(timing) -%}
-    {% set start_time = none %}
-    {% set end_time = none %}
+    {% set start_at = none %}
+    {% set end_at = none %}
     {% set duration = none %}
 
     {% if timing %}
-        {% set start_time = timing.started_at %}
-        {% set end_time = timing.completed_at %}
+        {% set start_at = timing.started_at %}
+        {% set end_at = timing.completed_at %}
     {% endif %}
 
-    {% if start_time and end_time %}
-        {% set duration = ((end_time - start_time).total_seconds() * 1000) | round %}
+    {% if start_at and end_at %}
+        {% set duration = ((end_at - start_at).total_seconds() * 1000) | round %}
     {% endif %}
 
     {{ return({
-        'start_time': start_time,
-        'end_time': end_time,
+        'start_at': start_at,
+        'end_at': end_at,
         'duration': duration
     }) }}
 {%- endmacro %}

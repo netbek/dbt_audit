@@ -23,14 +23,14 @@ models:
     data_type: String
   - name: is_full_refresh
     data_type: Bool
-  - name: run_start_time
+  - name: run_start_at
     data_type: DateTime64(6)
-  - name: compile_start_time
+  - name: compile_start_at
     data_type: Nullable(DateTime64(6))
   - name: compile_duration
     data_type: Nullable(UInt64)
     description: Duration in milliseconds.
-  - name: execute_start_time
+  - name: execute_start_at
     data_type: Nullable(DateTime64(6))
   - name: execute_duration
     data_type: Nullable(UInt64)
