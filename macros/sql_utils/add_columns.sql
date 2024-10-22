@@ -6,7 +6,7 @@
 {% macro clickhouse__add_columns(cte_ref) %}
     select
         *,
-        cityHash64('{{ invocation_id }}', '{{ model.unique_id }}') as dbt_run_id
+        cityHash64('{{ invocation_id }}', '{{ model.unique_id }}') as _dbt_run_id
     from {{ cte_ref }}
 {% endmacro %}
 
@@ -14,6 +14,6 @@
 {% macro postgres__add_columns(cte_ref) %}
     select
         *,
-        md5('{{ invocation_id }}' || '{{ model.unique_id }}') as dbt_run_id
+        md5('{{ invocation_id }}' || '{{ model.unique_id }}') as _dbt_run_id
     from {{ cte_ref }}
 {% endmacro %}
