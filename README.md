@@ -9,7 +9,7 @@ Based on [dbt_artifacts](https://github.com/brooklyn-data/dbt_artifacts/tree/2.6
     ```yaml
     packages:
       - package: https://github.com/netbek/dbt_audit
-        version: 0.1.3
+        version: 0.1.4
     ```
 
 2. Configure the package in your `dbt_project.yml`:
@@ -20,7 +20,7 @@ Based on [dbt_artifacts](https://github.com/brooklyn-data/dbt_artifacts/tree/2.6
         +schema: dbt_audit
 
     vars:
-      dbt_audit_columns: [dbt_run_id]
+      dbt_audit_columns: [_dbt_run_id]
     ```
 
 3. Run `dbt deps` to install the package.
