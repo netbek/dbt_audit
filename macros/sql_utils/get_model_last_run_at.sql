@@ -1,4 +1,4 @@
-{% macro select_model_last_run_at(model, status=none) -%}
+{% macro get_model_last_run_at(model, status=none) -%}
     {% set sql %}
         {{ dbt_audit.model_last_run_at(model, status=status) }}
     {% endset %}
