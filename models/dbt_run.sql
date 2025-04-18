@@ -1,11 +1,32 @@
-{% if target.type == 'clickhouse' %}
+{% if target.type == "clickhouse" %}
     {{ config(
-        tags=['dbt_audit'],
-        contract={'enforced': true},
-        on_schema_change='fail',
-        materialized='incremental',
-        incremental_strategy='append',
-        unique_key='id'
+        tags=["dbt_audit"],
+        contract={"enforced": true},
+        on_schema_change="fail",
+        materialized="incremental",
+        incremental_strategy="append",
+        unique_key="id",
+        columns={
+            "id": {"data_type": "UInt64"},
+            "invocation_id": {"data_type": "UUID"},
+            "node_id": {"data_type": "String"},
+            "thread_id": {"data_type": "String"},
+            "resource_type": {"data_type": "String"},
+            "schema": {"data_type": "String"},
+            "name": {"data_type": "String"},
+            "alias": {"data_type": "String"},
+            "materialization": {"data_type": "String"},
+            "is_full_refresh": {"data_type": "Bool"},
+            "run_start_at": {"data_type": "DateTime64(6)"},
+            "compile_start_at": {"data_type": "Nullable(DateTime64(6))"},
+            "compile_duration": {"data_type": "Nullable(UInt64)", "description": "Duration in milliseconds."},
+            "execute_start_at": {"data_type": "Nullable(DateTime64(6))"},
+            "execute_duration": {"data_type": "Nullable(UInt64)", "description": "Duration in milliseconds."},
+            "status": {"data_type": "String"},
+            "message": {"data_type": "String"},
+            "rows_affected": {"data_type": "Nullable(UInt64)"},
+            "adapter_response": {"data_type": "String"}
+        }
     ) }}
 
     with final as (
@@ -35,14 +56,35 @@
     from final
     where 1 = 0
 
-{% elif target.type == 'postgres' %}
+{% elif target.type == "postgres" %}
     {{ config(
-        tags=['dbt_audit'],
-        contract={'enforced': false},
-        on_schema_change='fail',
-        materialized='incremental',
-        incremental_strategy='append',
-        unique_key='id'
+        tags=["dbt_audit"],
+        contract={"enforced": false},
+        on_schema_change="fail",
+        materialized="incremental",
+        incremental_strategy="append",
+        unique_key="id",
+        columns={
+            "id": {"data_type": "varchar(32)"},
+            "invocation_id": {"data_type": "uuid"},
+            "node_id": {"data_type": "text"},
+            "thread_id": {"data_type": "text"},
+            "resource_type": {"data_type": "text"},
+            "schema": {"data_type": "text"},
+            "name": {"data_type": "text"},
+            "alias": {"data_type": "text"},
+            "materialization": {"data_type": "text"},
+            "is_full_refresh": {"data_type": "boolean"},
+            "run_start_at": {"data_type": "timestamp"},
+            "compile_start_at": {"data_type": "timestamp"},
+            "compile_duration": {"data_type": "bigint", "description": "Duration in milliseconds."},
+            "execute_start_at": {"data_type": "timestamp"},
+            "execute_duration": {"data_type": "bigint", "description": "Duration in milliseconds."},
+            "status": {"data_type": "text"},
+            "message": {"data_type": "text"},
+            "rows_affected": {"data_type": "bigint"},
+            "adapter_response": {"data_type": "text"}
+        }
     ) }}
 
     with final as (
