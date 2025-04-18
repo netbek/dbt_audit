@@ -117,8 +117,8 @@
                                         {{ 'true' if value else 'false' }}
                                     {%- elif data_type in unquoted_types -%}
                                         {{ value }}
-                                    {%- elif data_type == 'timestamp' -%}
-                                        '{{ value }}'::timestamp at time zone 'UTC' at time zone '{{ database_timezone }}';
+                                    {%- elif data_type == 'timestamp with time zone' -%}
+                                        cast((cast('{{ value }}' as timestamp without time zone) at time zone 'UTC' at time zone '{{ database_timezone }}') as timestamp with time zone)
                                     {%- else -%}
                                         '{{ value }}'
                                     {%- endif %}
