@@ -83,6 +83,7 @@
     {% set unquoted_types = ['smallint', 'integer', 'bigint', 'decimal', 'numeric', 'real', 'double precision', 'smallserial', 'serial', 'bigserial'] %}
 
     {% if execute and relation %}
+        {% set database_timezone = dbt_audit.database_timezone() %}
         {% set columns = adapter.get_columns_in_relation(relation) %}
         {% set columns_dict = {} %}
         {% set column_names = [] %}
@@ -116,6 +117,8 @@
                                         {{ 'true' if value else 'false' }}
                                     {%- elif data_type in unquoted_types -%}
                                         {{ value }}
+                                    {%- elif data_type == 'timestamp' -%}
+                                        '{{ value }}'::timestamp at time zone 'UTC' at time zone '{{ database_timezone }}';
                                     {%- else -%}
                                         '{{ value }}'
                                     {%- endif %}
