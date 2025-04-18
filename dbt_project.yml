@@ -1,7 +1,7 @@
 name: dbt_audit
-version: 0.1.9
+version: 0.1.10
 config-version: 2
-require-dbt-version: [">=1.3.0", "<1.9.0"]
+require-dbt-version: [">=1.3.0", "<1.10.0"]
 profile: dbt_audit
 
 on-run-start:
