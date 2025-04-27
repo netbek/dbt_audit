@@ -9,7 +9,7 @@ Based on [dbt_artifacts](https://github.com/brooklyn-data/dbt_artifacts/tree/2.6
     ```yaml
     packages:
       - package: https://github.com/netbek/dbt_audit
-        version: 0.1.12
+        version: 0.1.13
     ```
 
 2. Configure the package in your `dbt_project.yml`:
